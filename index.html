@@ -4,10 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hyperion · Proyectos / Projects</title>
-<meta name="description" content="Bots de Discord, paneles web e infraestructura propia hechos por Hyperion. Discord bots, web dashboards and self-hosted infrastructure by Hyperion.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 29 27H3z' fill='%237c6cf2'/%3E%3C/svg%3E">
+<meta name="description" content="Desarrollo de bots para Discord, paneles web e infraestructura autogestionada. Discord bots, web dashboards and self-managed infrastructure.">
+<meta name="theme-color" content="#04040c">
+<link rel="icon" href="img/prisma.svg" type="image/svg+xml">
+<meta property="og:title" content="Hyperion · Desarrollo de software">
+<meta property="og:description" content="Bots para Discord, paneles web e infraestructura autogestionada.">
+<meta property="og:image" content="https://hyperion.is-a.dev/img/compartir.png">
+<meta property="og:url" content="https://hyperion.is-a.dev/">
+<meta name="twitter:card" content="summary_large_image">
 <script>
-  // Elige idioma: el guardado, o el del navegador (español si empieza con "es", si no inglés).
+  // Idioma: el guardado, o el del navegador (español si empieza con "es", si no inglés).
   (function () {
     var l;
     try { l = localStorage.getItem("idioma"); } catch (e) {}
@@ -17,185 +23,508 @@
   })();
 </script>
 <style>
+  @font-face { font-family: "Sora"; font-weight: 500 700; font-display: swap; src: url("fuentes/Sora-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215; }
+  @font-face { font-family: "Sora"; font-weight: 500 700; font-display: swap; src: url("fuentes/Sora-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Figtree"; font-weight: 400 700; font-display: swap; src: url("fuentes/Figtree-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215; }
+  @font-face { font-family: "Figtree"; font-weight: 400 700; font-display: swap; src: url("fuentes/Figtree-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF; }
+  @property --giro { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
   :root {
-    --fondo: #f6f5fb; --tarjeta: #ffffff; --texto: #1d1b2c; --suave: #615e76; --borde: #e4e1f0;
-    --acento: #6b5ce7; --chip: #efedfb; --ok: #1f9d55;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --fondo: #12111a; --tarjeta: #1c1a27; --texto: #ecebf5; --suave: #a29fb6; --borde: #2c2a3b;
-            --acento: #9d90ff; --chip: #262337; --ok: #3cc47c; }
+    --noche: #04040c; --texto: #eceefb; --suave: #a7adc6; --tenue: #6f7594; --linea: rgba(255,255,255,.09);
+    --cian: #67e8f9; --lila: #c4b5fd; --rosa: #f9a8d4; --oro: #fde68a; --ok: #4ade80; --mal: #f87171;
+    --nacar: linear-gradient(100deg, #a5f3fc 0%, #c4b5fd 30%, #f9a8d4 55%, #fde68a 78%, #a5f3fc 100%);
+    --iris: conic-gradient(from var(--giro), #67e8f9, #a78bfa, #f472b6, #fbbf24, #4ade80, #67e8f9);
+    --vidrio: linear-gradient(160deg, rgba(255,255,255,.085), rgba(255,255,255,.025) 55%, rgba(255,255,255,.04));
+    --sombra: 0 30px 60px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.04);
+    --titulos: "Sora", "Segoe UI", system-ui, sans-serif;
+    --cuerpo: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
   }
   html[data-lang="es"] [lang="en"]:not(html), html[data-lang="en"] [lang="es"]:not(html) { display: none !important; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--fondo); color: var(--texto);
-         font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
-  .barra { display: flex; justify-content: flex-end; margin-bottom: 28px; }
-  .idiomas { display: inline-flex; border: 1px solid var(--borde); border-radius: 999px; background: var(--tarjeta); padding: 3px; }
-  .idiomas button { border: 0; background: none; color: var(--suave); font: 600 .85rem/1 inherit; font-family: inherit;
-                    padding: 6px 12px; border-radius: 999px; cursor: pointer; }
-  .idiomas button[aria-pressed="true"] { background: var(--acento); color: #fff; }
-  a { color: var(--acento); }
-  .hero h1 { font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
-  .hero .rol { color: var(--acento); font-weight: 600; font-size: 1rem; margin: -4px 0 14px; letter-spacing: .02em; }
-  .hero p { color: var(--suave); font-size: 1.08rem; margin: 0 0 20px; max-width: 58ch; }
-  .enlaces { display: flex; flex-wrap: wrap; gap: 10px; }
-  .boton { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px;
-           border: 1px solid var(--borde); background: var(--tarjeta); color: var(--texto); text-decoration: none;
-           font-weight: 600; font-size: .92rem; }
-  .boton:hover { border-color: var(--acento); }
+  html { background: var(--noche); scroll-behavior: smooth; }
+  body { margin: 0; color: var(--texto); font: 16px/1.65 var(--cuerpo); overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  ::selection { background: rgba(196,181,253,.35); }
+
+  /* ---------- Cielo: auroras, estrellas y grano ---------- */
+  .cielo { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+    background: radial-gradient(900px 500px at 30% -10%, #1c1648, transparent 70%), var(--noche); }
+  .aurora { position: absolute; border-radius: 50%; filter: blur(70px); mix-blend-mode: screen; animation: ondular 32s ease-in-out infinite alternate; }
+  .a1 { width: 1100px; height: 380px; left: -20%; top: -8%; rotate: -12deg; opacity: .5;
+    background: linear-gradient(90deg, transparent, #14b8a6 25%, #22d3ee 45%, #6366f1 70%, transparent); }
+  .a2 { width: 900px; height: 320px; right: -28%; top: 30%; rotate: 14deg; opacity: .35; animation-duration: 40s;
+    background: linear-gradient(90deg, transparent, #8b5cf6 30%, #ec4899 60%, transparent); }
+  .a3 { width: 1000px; height: 300px; left: 5%; bottom: -14%; rotate: -6deg; opacity: .28; animation-duration: 48s;
+    background: linear-gradient(90deg, transparent, #22c55e 30%, #06b6d4 55%, #a855f7 80%, transparent); }
+  @keyframes ondular { 50% { translate: 6% 5%; scale: 1.15 .8; } 100% { translate: -4% 9%; scale: .95 1.2; } }
+  .estrellas { position: absolute; inset: 0; opacity: .55; animation: titilar 7s ease-in-out infinite alternate;
+    background-image: radial-gradient(1px 1px at 12% 18%, #fff, transparent 60%), radial-gradient(1px 1px at 72% 12%, #e0e7ff, transparent 60%),
+      radial-gradient(1.5px 1.5px at 38% 64%, #fff, transparent 60%), radial-gradient(1px 1px at 86% 54%, #fbcfe8, transparent 60%),
+      radial-gradient(1px 1px at 58% 32%, #fff, transparent 60%), radial-gradient(1.5px 1.5px at 22% 82%, #cffafe, transparent 60%),
+      radial-gradient(1px 1px at 92% 86%, #fff, transparent 60%), radial-gradient(1px 1px at 6% 48%, #ddd6fe, transparent 60%);
+    background-size: 640px 640px; }
+  @keyframes titilar { to { opacity: .25; } }
+  .cielo::after { content: ""; position: absolute; inset: 0; opacity: .07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  /* ---------- Piezas comunes ---------- */
+  .contenedor { width: min(1120px, 100%); margin: 0 auto; padding: 0 20px; }
+  .nacar { background: var(--nacar); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: nacar 12s linear infinite; }
+  @keyframes nacar { to { background-position: 220% 0; } }
+  .vidrio { position: relative; background: var(--vidrio), rgba(14,14,30,.5); border-radius: 28px; box-shadow: var(--sombra);
+    backdrop-filter: blur(22px) saturate(150%); -webkit-backdrop-filter: blur(22px) saturate(150%); }
+  .vidrio::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+    background: linear-gradient(160deg, rgba(255,255,255,.22), rgba(255,255,255,.04) 30%, rgba(255,255,255,.02) 70%, rgba(196,181,253,.28));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+  .vidrio.vivo::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+    background: var(--iris); opacity: 0; transition: opacity .45s;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+  .vidrio.vivo:hover::after { opacity: .8; animation: girar 5s linear infinite; }
+  @keyframes girar { to { --giro: 360deg; } }
+  .etiqueta { display: inline-flex; align-items: center; gap: 10px; font: 600 12px/1 var(--cuerpo); letter-spacing: .22em; text-transform: uppercase; color: var(--lila); }
+  .etiqueta::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: var(--nacar); box-shadow: 0 0 12px rgba(196,181,253,.8); }
+  h2.seccion { margin: 14px 0 34px; font: 600 clamp(28px, 4.4vw, 44px)/1.1 var(--titulos); letter-spacing: -.035em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #dbe0f7; background: rgba(255,255,255,.05); border: 1px solid var(--linea); }
+  .boton { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 22px; border-radius: 999px; text-decoration: none;
+    font: 600 15px var(--cuerpo); color: var(--texto); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16);
+    transition: transform .2s, background .2s, border-color .2s, box-shadow .2s; position: relative; overflow: hidden; }
   .boton svg { width: 18px; height: 18px; fill: currentColor; }
-  h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .08em; color: var(--suave); margin: 56px 0 16px; }
-  .proyecto { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 16px; padding: 22px 22px 18px;
-              margin-bottom: 16px; }
-  .proyecto header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  .proyecto h3 { margin: 0; font-size: 1.25rem; }
-  .tipo { color: var(--suave); font-size: .88rem; }
-  .proyecto p { margin: 8px 0 12px; }
-  .proyecto ul { margin: 0 0 14px; padding-left: 20px; color: var(--suave); }
-  .proyecto li { margin: 3px 0; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { background: var(--chip); border-radius: 999px; padding: 3px 10px; font-size: .8rem; font-weight: 600; }
-  .pie-proyecto { margin-top: 14px; font-size: .9rem; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-  .privado { color: var(--suave); }
-  .vivo { display: inline-flex; align-items: center; gap: 6px; }
-  .vivo::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
-  footer { margin-top: 56px; color: var(--suave); font-size: .85rem; text-align: center; }
+  .boton:hover { transform: translateY(-2px); background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.3); }
+  .boton.perla { color: #0b0b1a; border: 0; background: linear-gradient(100deg, #cffafe, #ddd6fe 45%, #fbcfe8 75%, #fef3c7);
+    box-shadow: 0 12px 34px -12px rgba(196,181,253,.95), inset 0 1px 0 rgba(255,255,255,.7); }
+  .boton.perla::after { content: ""; position: absolute; inset: 0; translate: -120% 0; transition: translate .7s ease;
+    background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.85) 50%, transparent 70%); }
+  .boton.perla:hover::after { translate: 120% 0; }
+
+  /* ---------- Barra superior flotante ---------- */
+  .barra { position: sticky; top: 14px; z-index: 10; margin: 14px auto 0; width: min(1120px, calc(100% - 24px));
+    display: flex; align-items: center; gap: 14px; padding: 10px 12px 10px 16px; border-radius: 999px; }
+  .barra .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 15px var(--titulos); letter-spacing: .24em; }
+  .barra .marca img { width: 32px; height: 32px; border-radius: 10px; box-shadow: 0 0 18px -4px rgba(165,243,252,.6); }
+  .barra nav { display: flex; gap: 4px; margin-left: auto; }
+  .barra nav a { text-decoration: none; color: var(--suave); font-weight: 600; font-size: 14px; padding: 8px 14px; border-radius: 999px; transition: .2s; }
+  .barra nav a:hover { color: #fff; background: rgba(255,255,255,.06); }
+  .idiomas { display: inline-flex; padding: 3px; border-radius: 999px; background: rgba(4,4,12,.55); border: 1px solid var(--linea); }
+  .idiomas button { border: 0; background: none; color: var(--suave); font: 700 12px/1 var(--cuerpo); padding: 8px 11px; border-radius: 999px; cursor: pointer; letter-spacing: .06em; }
+  .idiomas button[aria-pressed="true"] { color: #0b0b1a; background: linear-gradient(100deg, #cffafe, #ddd6fe 50%, #fbcfe8); }
+
+  /* ---------- Portada ---------- */
+  .portada { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: 48px; align-items: center; padding: 96px 0 72px; }
+  .portada .rol { font: 600 15px var(--cuerpo); letter-spacing: .24em; text-transform: uppercase; color: var(--cian); }
+  .portada h1 { margin: 14px 0 18px; font: 700 clamp(56px, 10vw, 112px)/.95 var(--titulos); letter-spacing: -.055em;
+    filter: drop-shadow(0 0 40px rgba(196,181,253,.25)); }
+  .portada .intro { margin: 0 0 30px; max-width: 54ch; font-size: 18.5px; color: #c9cde3; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+  .acciones .discord { cursor: default; }
+
+  /* El prisma de la portada */
+  .escena { position: relative; aspect-ratio: 1; max-width: 440px; justify-self: center; width: 100%; }
+  .escena svg { width: 100%; height: 100%; overflow: visible; }
+  .escena .haz { stroke-dasharray: 12 10; animation: correr 1.6s linear infinite; }
+  @keyframes correr { to { stroke-dashoffset: -44; } }
+  .escena .rayos polygon { animation: pulsar 5s ease-in-out infinite alternate; transform-origin: 300px 250px; }
+  .escena .rayos polygon:nth-child(2n) { animation-delay: -2.5s; }
+  @keyframes pulsar { from { opacity: .55; } to { opacity: 1; } }
+  .escena .cristal { animation: flotar 7s ease-in-out infinite; transform-origin: center; }
+  @keyframes flotar { 50% { translate: 0 -8px; } }
+
+  /* Señal en vivo */
+  .senal { margin-top: 34px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; padding: 16px 20px; border-radius: 22px; max-width: 560px; }
+  .senal .orbe { width: 12px; height: 12px; border-radius: 50%; background: var(--tenue); flex: none; }
+  .senal.ok .orbe { background: var(--ok); box-shadow: 0 0 0 4px rgba(74,222,128,.15), 0 0 18px var(--ok); animation: latir 1.8s ease-in-out infinite; }
+  .senal.mal .orbe { background: var(--mal); box-shadow: 0 0 18px var(--mal); }
+  @keyframes latir { 50% { box-shadow: 0 0 0 8px rgba(74,222,128,0), 0 0 22px var(--ok); } }
+  .senal b { font-weight: 700; }
+  .senal .dato { color: var(--suave); font-size: 14px; }
+  .senal .dato strong { color: var(--texto); }
+  .senal a { margin-left: auto; color: var(--cian); font-weight: 600; font-size: 14px; text-decoration: none; }
+  .senal a:hover { text-decoration: underline; }
+
+  section { padding: 72px 0; }
+
+  /* ---------- Proyecto destacado ---------- */
+  .destacado { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 0; overflow: hidden; border-radius: 34px; }
+  .destacado .visual { position: relative; min-height: 360px; background: radial-gradient(420px 300px at 40% 40%, rgba(167,139,250,.35), transparent 70%),
+    radial-gradient(360px 260px at 70% 80%, rgba(34,211,238,.25), transparent 70%); display: grid; place-items: center; padding: 30px; }
+  .destacado .visual img { width: min(240px, 70%); border-radius: 46px; box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 30px 80px -20px rgba(167,139,250,.8);
+    animation: flotar 8s ease-in-out infinite; }
+  .destacado .info { padding: 40px 42px; }
+  .destacado h3 { margin: 6px 0 4px; font: 700 40px/1.05 var(--titulos); letter-spacing: -.04em; }
+  .destacado .tipo { color: var(--lila); font-weight: 600; }
+  .destacado p { color: #c9cde3; }
+  .lista { list-style: none; padding: 0; margin: 18px 0 22px; display: grid; gap: 10px; }
+  .lista li { position: relative; padding-left: 26px; color: #c3c8df; }
+  .lista li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--nacar); box-shadow: 0 0 10px rgba(196,181,253,.9); }
+  .lista strong { color: var(--texto); }
+  .pie-proyecto { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 22px; font-size: 14.5px; }
+  .pie-proyecto a { color: var(--cian); text-decoration: none; font-weight: 600; }
+  .pie-proyecto a:hover { text-decoration: underline; }
+  .pie-proyecto .privado { color: var(--tenue); }
+  .insignia { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    color: var(--suave); background: rgba(255,255,255,.05); border: 1px solid var(--linea); }
+  .insignia i { width: 8px; height: 8px; border-radius: 50%; background: var(--tenue); }
+  .insignia.ok { color: #bbf7d0; border-color: rgba(74,222,128,.3); } .insignia.ok i { background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+  .insignia.mal { color: #fecaca; border-color: rgba(248,113,113,.3); } .insignia.mal i { background: var(--mal); }
+
+  /* ---------- Otros proyectos ---------- */
+  .rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+  .proyecto { padding: 30px; border-radius: 28px; transition: transform .3s ease; }
+  .proyecto:hover { transform: translateY(-5px); }
+  .proyecto .cabeza { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .icono { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; flex: none; color: #fff;
+    background: radial-gradient(circle at 32% 26%, color-mix(in srgb, var(--c) 70%, #fff 10%), color-mix(in srgb, var(--c) 18%, transparent) 70%);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent), 0 0 28px -6px var(--c); }
+  .icono svg { width: 22px; height: 22px; }
+  .proyecto h3 { margin: 0; font: 700 22px/1.2 var(--titulos); letter-spacing: -.025em; }
+  .proyecto .tipo { color: var(--suave); font-size: 14px; }
+  .proyecto p { color: #c3c8df; margin: 6px 0 14px; }
+  .proyecto .lista { margin-top: 0; }
+
+  /* ---------- Cómo funciona ---------- */
+  .mapa { padding: 26px; border-radius: 34px; }
+  .mapa svg { width: 100%; height: auto; display: block; }
+  .mapa .flujo { fill: none; stroke-width: 2; stroke-dasharray: 6 9; animation: correr 1.4s linear infinite; }
+  .mapa .nodo rect { fill: rgba(10,10,26,.78); stroke: rgba(255,255,255,.16); }
+  .mapa .nodo .t { fill: #fff; font: 700 17px var(--titulos); }
+  .mapa .nodo .s { fill: #a7adc6; font: 500 13px var(--cuerpo); }
+  .mapa .nota { fill: #8b91ae; font: 600 12px var(--cuerpo); letter-spacing: .08em; text-transform: uppercase; }
+  .flujo-movil { display: none; list-style: none; margin: 0; padding: 0; counter-reset: paso; }
+  .flujo-movil li { position: relative; padding: 0 0 18px 46px; color: #c3c8df; }
+  .flujo-movil li::before { counter-increment: paso; content: counter(paso); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center; font: 700 14px var(--titulos); color: #0b0b1a; background: linear-gradient(100deg, #cffafe, #ddd6fe 50%, #fbcfe8); }
+  .flujo-movil li::after { content: ""; position: absolute; left: 14px; top: 34px; bottom: 4px; width: 2px; background: linear-gradient(var(--lila), transparent); }
+  .flujo-movil li:last-child::after { display: none; }
+  .flujo-movil b { color: #fff; }
+
+  /* ---------- Herramientas ---------- */
+  .herramientas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .herramientas .vidrio { padding: 26px; border-radius: 26px; }
+  .herramientas h3 { margin: 0 0 14px; font: 700 18px var(--titulos); }
+
+  /* ---------- Contacto y pie ---------- */
+  .contacto { text-align: center; padding: 56px 28px; border-radius: 36px; overflow: hidden;
+    background: radial-gradient(500px 260px at 50% 0%, rgba(167,139,250,.3), transparent 70%), var(--vidrio), rgba(14,14,30,.5); }
+  .contacto h2 { margin: 10px 0 12px; font: 700 clamp(30px, 5vw, 52px)/1.05 var(--titulos); letter-spacing: -.04em; }
+  .contacto p { color: #c9cde3; margin: 0 auto 26px; max-width: 52ch; }
+  .contacto .acciones { justify-content: center; }
+  footer { padding: 40px 0 56px; text-align: center; color: var(--tenue); font-size: 13.5px; }
+
+  /* ---------- Aparecer al bajar ---------- */
+  .revelar { opacity: 0; translate: 0 26px; transition: opacity .8s ease, translate .8s cubic-bezier(.2,.7,.2,1); }
+  .revelar.visto { opacity: 1; translate: 0 0; }
+
+  /* ---------- Pantallas chicas ---------- */
+  @media (max-width: 900px) {
+    .portada { grid-template-columns: 1fr; padding: 56px 0 40px; gap: 18px; }
+    .escena { order: -1; max-width: 300px; }
+    .destacado { grid-template-columns: 1fr; }
+    .destacado .visual { min-height: 240px; }
+    .destacado .info { padding: 28px 24px; }
+    .rejilla, .herramientas { grid-template-columns: 1fr; }
+    .barra nav { display: none; }
+    .barra .idiomas { margin-left: auto; }
+    .mapa svg { display: none; }
+    .flujo-movil { display: block; }
+    section { padding: 52px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .revelar { opacity: 1; translate: none; }
+    html { scroll-behavior: auto; }
+  }
 </style>
 </head>
 <body>
-<main>
-  <div class="barra">
-    <div class="idiomas" role="group" aria-label="Idioma / Language">
-      <button type="button" data-l="es">Español</button>
-      <button type="button" data-l="en">English</button>
+<div class="cielo" aria-hidden="true"><div class="aurora a1"></div><div class="aurora a2"></div><div class="aurora a3"></div><div class="estrellas"></div></div>
+
+<header class="barra vidrio">
+  <a class="marca" href="#inicio"><img src="img/prisma.svg" alt=""><span>HYPERION</span></a>
+  <nav>
+    <a href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a>
+    <a href="#arquitectura"><span lang="es">Cómo funciona</span><span lang="en">How it works</span></a>
+    <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="idiomas" role="group" aria-label="Idioma / Language">
+    <button type="button" data-l="es">ES</button><button type="button" data-l="en">EN</button>
+  </div>
+</header>
+
+<main class="contenedor" id="inicio">
+  <!-- Portada -->
+  <div class="portada">
+    <div>
+      <div class="rol"><span lang="es">Desarrollo de software · Chile</span><span lang="en">Software development · Chile</span></div>
+      <h1 class="nacar">Hyperion</h1>
+      <p class="intro" lang="es">Desarrollo de bots para Discord, paneles web e infraestructura autogestionada: servidores con Docker,
+        despliegue continuo, pruebas automatizadas y monitoreo con recuperación automática.</p>
+      <p class="intro" lang="en">Development of Discord bots, web dashboards and self-managed infrastructure: Docker servers,
+        continuous deployment, automated testing and monitoring with automatic recovery.</p>
+      <div class="acciones">
+        <a class="boton perla" href="#proyectos"><span lang="es">Ver proyectos</span><span lang="en">View projects</span></a>
+        <a class="boton" href="https://github.com/HyperionSDX">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub</a>
+        <span class="boton discord" title="Discord">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0015.4 3l-.6 1.3a18.4 18.4 0 00-5.6 0L8.6 3a19.7 19.7 0 00-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 006 3l1.3-2.1a12.9 12.9 0 01-2-1l.5-.4a14.2 14.2 0 0012.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 006-3c.5-5.2-.9-9.7-3.6-13.8zM8 15.4c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.6 8 10.6s2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg>
+          d.jmnzz09</span>
+      </div>
+      <div class="senal vidrio" id="senal">
+        <span class="orbe"></span>
+        <div><b>Prisma</b> · <span id="senal-texto"><span lang="es">consultando…</span><span lang="en">checking…</span></span></div>
+        <div class="dato" id="senal-datos"></div>
+        <a href="https://hyperion.is-a.dev/prisma-estado/"><span lang="es">Estado en vivo →</span><span lang="en">Live status →</span></a>
+      </div>
+    </div>
+
+    <div class="escena" aria-hidden="true">
+      <svg viewBox="0 0 512 512">
+        <defs>
+          <linearGradient id="vidrio" x1="180" y1="120" x2="350" y2="350" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#cffafe" stop-opacity=".42"/><stop offset=".5" stop-color="#c4b5fd" stop-opacity=".16"/><stop offset="1" stop-color="#fbcfe8" stop-opacity=".34"/></linearGradient>
+          <linearGradient id="nacar" x1="140" y1="120" x2="380" y2="340" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a5f3fc"/><stop offset=".35" stop-color="#c4b5fd"/><stop offset=".7" stop-color="#f9a8d4"/><stop offset="1" stop-color="#fde68a"/></linearGradient>
+          <filter id="brillo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+          <filter id="suave" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <line x1="-40" y1="300" x2="176" y2="262" stroke="#fff" stroke-width="16" stroke-linecap="round" opacity=".28" filter="url(#brillo)"/>
+        <line class="haz" x1="-40" y1="300" x2="176" y2="262" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        <g class="rayos" filter="url(#suave)">
+          <polygon points="329,240 560,150 560,192" fill="#67e8f9" opacity=".8"/>
+          <polygon points="329,244 560,200 560,242" fill="#818cf8" opacity=".8"/>
+          <polygon points="329,248 560,250 560,292" fill="#c084fc" opacity=".8"/>
+          <polygon points="329,252 560,300 560,342" fill="#f472b6" opacity=".8"/>
+          <polygon points="329,256 560,350 560,392" fill="#fbbf24" opacity=".75"/>
+        </g>
+        <g class="cristal">
+          <polygon points="256,116 378,336 134,336" fill="url(#nacar)" opacity=".3" filter="url(#brillo)"/>
+          <polygon points="256,116 378,336 134,336" fill="url(#vidrio)" stroke="url(#nacar)" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M248 150 L170 302" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+          <circle cx="176" cy="262" r="7" fill="#fff" filter="url(#suave)"/>
+          <circle cx="329" cy="250" r="6" fill="#fff" filter="url(#suave)"/>
+        </g>
+      </svg>
     </div>
   </div>
 
-  <section class="hero">
-    <h1>Hyperion</h1>
-    <p class="rol"><span lang="es">Desarrollo de software · Chile</span><span lang="en">Software development · Chile</span></p>
-    <p lang="es">Desarrollo de bots para Discord, paneles web e infraestructura autogestionada: servidores con Docker,
-       despliegue continuo, pruebas automatizadas y monitoreo con recuperación automática.</p>
-    <p lang="en">Development of Discord bots, web dashboards and self-managed infrastructure: Docker servers,
-       continuous deployment, automated testing and monitoring with automatic recovery.</p>
-    <div class="enlaces">
-      <a class="boton" href="https://github.com/HyperionSDX">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.540 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.130-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.420-3.58-8-8-8z"/></svg>
-        GitHub
-      </a>
-      <span class="boton">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0015.4 3l-.6 1.3a18.4 18.4 0 00-5.6 0L8.6 3a19.7 19.7 0 00-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 006 3l1.3-2.1a12.9 12.9 0 01-2-1l.5-.4a14.2 14.2 0 0012.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 006-3c.5-5.2-.9-9.7-3.6-13.8zM8 15.4c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.6 8 10.6s2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg>
-        Discord: d.jmnzz09
-      </span>
+  <!-- Proyecto destacado -->
+  <section id="proyectos">
+    <div class="etiqueta revelar"><span lang="es">Proyectos</span><span lang="en">Projects</span></div>
+    <h2 class="seccion revelar"><span lang="es">Lo que he construido</span><span lang="en">What I have built</span></h2>
+
+    <article class="destacado vidrio vivo revelar">
+      <div class="visual"><img src="img/prisma.svg" alt="Logo de Prisma"></div>
+      <div class="info">
+        <span class="insignia" id="insignia-prisma"><i></i><span lang="es">Estado en vivo</span><span lang="en">Live status</span></span>
+        <h3 class="nacar">Prisma</h3>
+        <div class="tipo"><span lang="es">Asistente personal para Discord</span><span lang="en">Personal assistant for Discord</span></div>
+        <p lang="es">Un bot que ordena el día: resumen de la mañana con clima, agenda y noticias explicadas por IA, recordatorios,
+          conversación con fotos y documentos, y avisos cuando algo cambia en una página o un precio.</p>
+        <p lang="en">A bot that organizes the day: a morning briefing with weather, schedule and AI-explained news, reminders,
+          conversations with photos and documents, and alerts when a web page or a price changes.</p>
+        <ul class="lista" lang="es">
+          <li>Panel web instalable en el celular, con inicio de sesión de dos pasos y niveles de acceso.</li>
+          <li><strong>Prisma Security</strong>: guardián en GitHub Actions que revisa todo cada hora, intenta repararlo y explica en palabras simples lo ocurrido.</li>
+          <li>Funciona en más de un servidor: detecta dónde está, despliega ahí y se muda con un solo comando.</li>
+          <li>IA con respaldo en cadena (Groq, Gemini y un modelo propio) para no quedarse sin respuesta.</li>
+        </ul>
+        <ul class="lista" lang="en">
+          <li>Web dashboard installable on a phone, with two-step sign-in and access levels.</li>
+          <li><strong>Prisma Security</strong>: a GitHub Actions watchdog that checks everything every hour, tries to fix problems and explains in plain words what happened.</li>
+          <li>Runs on more than one server: it detects where it lives, deploys there and moves with a single command.</li>
+          <li>AI with a fallback chain (Groq, Gemini and a self-hosted model) so it always has an answer.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">discord.py</span><span class="chip">aiohttp</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span><span class="chip">Tailscale</span></div>
+        <div class="pie-proyecto">
+          <a href="https://hyperion.is-a.dev/prisma-estado/"><span lang="es">Página de estado →</span><span lang="en">Status page →</span></a>
+          <span class="privado"><span lang="es">Código privado (datos personales)</span><span lang="en">Private code (personal data)</span></span>
+        </div>
+      </div>
+    </article>
+
+    <div class="rejilla">
+      <article class="proyecto vidrio vivo revelar">
+        <div class="cabeza"><span class="icono" style="--c:#22d3ee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+          <div><h3>Botzy</h3><div class="tipo"><span lang="es">Bot de música para Discord</span><span lang="en">Music bot for Discord</span></div></div></div>
+        <p lang="es">Reproduce desde YouTube, Spotify, SoundCloud y Apple Music, con controles, panel web y cinco idiomas que se recuerdan entre reinicios.</p>
+        <p lang="en">Plays from YouTube, Spotify, SoundCloud and Apple Music, with controls, a web dashboard and five languages remembered across restarts.</p>
+        <ul class="lista" lang="es"><li>Diagnóstico y corrección de un corte de audio a los 120 ms (PCM sin cabeceras pasando por un segundo FFmpeg).</li><li>Si una pista falla, la busca en otra fuente y sigue sonando.</li></ul>
+        <ul class="lista" lang="en"><li>Diagnosis and fix of audio cutting out after 120 ms (headerless PCM going through a second FFmpeg).</li><li>If a track fails, it finds it on another source and keeps playing.</li></ul>
+        <div class="chips"><span class="chip">Node.js</span><span class="chip">discord-player</span><span class="chip">yt-dlp</span><span class="chip">FFmpeg</span></div>
+      </article>
+
+      <article class="proyecto vidrio vivo revelar">
+        <div class="cabeza"><span class="icono" style="--c:#f472b6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v12"/><circle cx="12" cy="18" r="3"/><path d="M12 3l6 3"/></svg></span>
+          <div><h3>CeratiBot</h3><div class="tipo"><span lang="es">Bot homenaje a Gustavo Cerati</span><span lang="en">Tribute bot to Gustavo Cerati</span></div></div></div>
+        <p lang="es">Trivia, discografía y un modo de charla con IA. Proyecto de fan: aclara que no es la persona real, no inventa citas ni reproduce letras.</p>
+        <p lang="en">Trivia, discography and an AI chat mode. A fan project: it makes clear it is not the real person, and never makes up quotes or reproduces lyrics.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">discord.py</span><span class="chip"><span lang="es">IA generativa</span><span lang="en">Generative AI</span></span></div>
+      </article>
+
+      <article class="proyecto vidrio vivo revelar">
+        <div class="cabeza"><span class="icono" style="--c:#a78bfa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span>
+          <div><h3><span lang="es">Infraestructura propia</span><span lang="en">Own infrastructure</span></h3><div class="tipo"><span lang="es">Servidores y operación</span><span lang="en">Servers and operations</span></div></div></div>
+        <p lang="es">Servidores Linux en la nube (Oracle Cloud y Azure) administrados con Docker Compose, con acceso privado por Tailscale.</p>
+        <p lang="en">Linux cloud servers (Oracle Cloud and Azure) managed with Docker Compose, with private access through Tailscale.</p>
+        <ul class="lista" lang="es"><li>Nube privada (Nextcloud) y servidor de Minecraft que se pausa cuando nadie juega.</li><li>Respaldos cifrados fuera del servidor y una prueba mensual de que se pueden restaurar.</li></ul>
+        <ul class="lista" lang="en"><li>Private cloud (Nextcloud) and a Minecraft server that pauses itself when nobody is playing.</li><li>Encrypted off-site backups and a monthly test that they can be restored.</li></ul>
+        <div class="chips"><span class="chip">Linux</span><span class="chip">Docker Compose</span><span class="chip">Oracle Cloud</span><span class="chip">Azure</span></div>
+      </article>
+
+      <article class="proyecto vidrio vivo revelar">
+        <div class="cabeza"><span class="icono" style="--c:#4ade80"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+          <div><h3>prisma-estado</h3><div class="tipo"><span lang="es">Página de estado pública</span><span lang="en">Public status page</span></div></div></div>
+        <p lang="es">Muestra en vivo si los servicios están en línea y en qué servidor corren. Vive fuera del servidor a propósito: si este se cae, la página lo sigue mostrando.</p>
+        <p lang="en">Shows live whether the services are online and which server they run on. It lives outside the server on purpose: if the server goes down, the page still shows it.</p>
+        <div class="chips"><span class="chip">HTML</span><span class="chip">GitHub Pages</span><span class="chip">GitHub Actions</span></div>
+        <div class="pie-proyecto">
+          <a href="https://hyperion.is-a.dev/prisma-estado/"><span lang="es">Ver página →</span><span lang="en">View page →</span></a>
+          <a href="https://github.com/HyperionSDX/prisma-estado"><span lang="es">Código →</span><span lang="en">Code →</span></a>
+        </div>
+      </article>
     </div>
   </section>
 
-  <h2><span lang="es">Proyectos</span><span lang="en">Projects</span></h2>
+  <!-- Cómo funciona -->
+  <section id="arquitectura">
+    <div class="etiqueta revelar"><span lang="es">Arquitectura</span><span lang="en">Architecture</span></div>
+    <h2 class="seccion revelar"><span lang="es">Cómo funciona Prisma</span><span lang="en">How Prisma works</span></h2>
+    <div class="mapa vidrio revelar">
+      <svg viewBox="0 0 960 430" role="img" aria-label="Diagrama de arquitectura de Prisma / Prisma architecture diagram">
+        <defs>
+          <linearGradient id="f1" x1="0" x2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#c4b5fd"/></linearGradient>
+          <linearGradient id="f2" x1="0" x2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#f9a8d4"/></linearGradient>
+          <linearGradient id="f3" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#c4b5fd"/></linearGradient>
+        </defs>
+        <path class="flujo" stroke="#a5f3fc" d="M230 105 H370"/>
+        <path class="flujo" stroke="#f9a8d4" d="M590 105 H730"/>
+        <path class="flujo" stroke="#fde68a" d="M480 300 V160"/>
+        <path class="flujo" stroke="url(#f3)" d="M195 320 C 195 230, 330 200, 380 150"/>
+        <path class="flujo" stroke="url(#f2)" d="M840 150 C 840 230, 790 270, 770 300"/>
+        <text class="nota" x="300" y="92" text-anchor="middle"><tspan lang="es">mensajes</tspan><tspan lang="en">messages</tspan></text>
+        <text class="nota" x="660" y="92" text-anchor="middle"><tspan lang="es">datos en vivo</tspan><tspan lang="en">live data</tspan></text>
+        <text class="nota" x="492" y="230"><tspan lang="es">respuestas</tspan><tspan lang="en">answers</tspan></text>
+        <text class="nota" x="70" y="262"><tspan lang="es">despliega y vigila</tspan><tspan lang="en">deploys and watches</tspan></text>
+        <text class="nota" x="842" y="236"><tspan lang="es">estado</tspan><tspan lang="en">status</tspan></text>
 
-  <article class="proyecto">
-    <header><h3>Prisma</h3><span class="tipo"><span lang="es">Asistente personal para Discord</span><span lang="en">Personal assistant for Discord</span></span></header>
-    <p lang="es">Un bot que ordena el día: resumen de la mañana con clima, agenda y noticias explicadas por IA, recordatorios,
-       conversación con fotos y documentos, y avisos cuando algo cambia en una página o un precio.</p>
-    <p lang="en">A bot that organizes the day: a morning briefing with weather, schedule and AI-explained news, reminders,
-       conversations with photos and documents, and alerts when a web page or a price changes.</p>
-    <ul lang="es">
-      <li>Panel web instalable en el celular, con inicio de sesión de dos pasos y niveles de acceso.</li>
-      <li><strong>Prisma Security</strong>: un guardián en GitHub Actions que revisa todo cada hora, intenta repararlo
-          solo y explica en palabras simples lo que pasó.</li>
-      <li>Pruebas automáticas antes de cada despliegue; si fallan, sigue corriendo la versión anterior.</li>
-      <li>IA con respaldo en cadena (Gemini, Groq y un modelo propio) para no quedarse sin respuesta.</li>
-    </ul>
-    <ul lang="en">
-      <li>Web dashboard installable on a phone, with two-step sign-in and access levels.</li>
-      <li><strong>Prisma Security</strong>: a GitHub Actions watchdog that checks everything every hour, tries to fix
-          problems on its own and explains in plain words what happened.</li>
-      <li>Automatic tests before every deployment; if they fail, the previous version keeps running.</li>
-      <li>AI with a fallback chain (Gemini, Groq and a self-hosted model) so it always has an answer.</li>
-    </ul>
-    <div class="chips"><span class="chip">Python</span><span class="chip">discord.py</span><span class="chip">aiohttp</span>
-      <span class="chip">Docker</span><span class="chip">GitHub Actions</span><span class="chip">Gemini</span></div>
-    <div class="pie-proyecto">
-      <a class="vivo" href="https://hyperionsdx.github.io/prisma-estado/"><span lang="es">Estado en vivo</span><span lang="en">Live status</span></a>
-      <span class="privado"><span lang="es">Código privado (datos personales)</span><span lang="en">Private code (personal data)</span></span>
+        <g class="nodo"><rect x="40" y="62" width="190" height="86" rx="22"/><text class="t" x="66" y="100">Discord</text>
+          <text class="s" x="66" y="124"><tspan lang="es">Donde hablas con Prisma</tspan><tspan lang="en">Where you talk to Prisma</tspan></text></g>
+        <g class="nodo"><rect x="370" y="52" width="220" height="106" rx="24" style="stroke:url(#f2);stroke-width:2"/><text class="t" x="396" y="94">Prisma</text>
+          <text class="s" x="396" y="118"><tspan lang="es">Bot · Docker</tspan><tspan lang="en">Bot · Docker</tspan></text>
+          <text class="s" x="396" y="138">Oracle / Azure</text></g>
+        <g class="nodo"><rect x="730" y="62" width="200" height="86" rx="22"/><text class="t" x="756" y="100"><tspan lang="es">Panel web</tspan><tspan lang="en">Web panel</tspan></text>
+          <text class="s" x="756" y="124"><tspan lang="es">2 pasos · en el celular</tspan><tspan lang="en">2-step · on your phone</tspan></text></g>
+        <g class="nodo"><rect x="60" y="300" width="270" height="92" rx="22"/><text class="t" x="86" y="338">GitHub Actions</text>
+          <text class="s" x="86" y="362"><tspan lang="es">Pruebas · despliegue · Security</tspan><tspan lang="en">Tests · deploy · Security</tspan></text></g>
+        <g class="nodo"><rect x="380" y="300" width="200" height="92" rx="22"/><text class="t" x="406" y="338"><tspan lang="es">IA</tspan><tspan lang="en">AI</tspan></text>
+          <text class="s" x="406" y="362">Groq · Gemini</text></g>
+        <g class="nodo"><rect x="660" y="300" width="250" height="92" rx="22"/><text class="t" x="686" y="338"><tspan lang="es">Página de estado</tspan><tspan lang="en">Status page</tspan></text>
+          <text class="s" x="686" y="362"><tspan lang="es">Pública · GitHub Pages</tspan><tspan lang="en">Public · GitHub Pages</tspan></text></g>
+      </svg>
+      <ol class="flujo-movil" lang="es">
+        <li><b>Discord</b>: escribes y Prisma responde.</li>
+        <li><b>Prisma</b>, en un servidor con Docker (Oracle o Azure), consulta a la <b>IA</b> (Groq o Gemini) cuando hace falta.</li>
+        <li><b>Panel web</b>: lo controlas desde el celular, con inicio de sesión de dos pasos.</li>
+        <li><b>GitHub Actions</b> prueba cada cambio, lo despliega y vigila que todo funcione.</li>
+        <li>La <b>página de estado</b> muestra en público lo que está en línea.</li>
+      </ol>
+      <ol class="flujo-movil" lang="en">
+        <li><b>Discord</b>: you write and Prisma answers.</li>
+        <li><b>Prisma</b>, on a Docker server (Oracle or Azure), asks the <b>AI</b> (Groq or Gemini) when needed.</li>
+        <li><b>Web panel</b>: you control it from your phone, with two-step sign-in.</li>
+        <li><b>GitHub Actions</b> tests every change, deploys it and watches that everything works.</li>
+        <li>The <b>status page</b> publicly shows what is online.</li>
+      </ol>
     </div>
-  </article>
+  </section>
 
-  <article class="proyecto">
-    <header><h3>Botzy</h3><span class="tipo"><span lang="es">Bot de música para Discord</span><span lang="en">Music bot for Discord</span></span></header>
-    <p lang="es">Reproduce desde YouTube, Spotify, SoundCloud y Apple Music, con controles, panel web y cinco idiomas que se
-       recuerdan entre reinicios.</p>
-    <p lang="en">Plays from YouTube, Spotify, SoundCloud and Apple Music, with controls, a web dashboard and five languages
-       that are remembered across restarts.</p>
-    <ul lang="es">
-      <li>Diagnóstico y corrección de un corte de audio a los 120 ms (PCM sin cabeceras pasando por un segundo FFmpeg).</li>
-      <li>Si una pista falla, la busca en otra fuente y sigue sonando en vez de saltarla en silencio.</li>
-      <li>Registro de todo lo que pasa en un canal de Discord.</li>
-    </ul>
-    <ul lang="en">
-      <li>Diagnosis and fix of audio cutting out after 120 ms (headerless PCM going through a second FFmpeg).</li>
-      <li>If a track fails, it looks for it on another source and keeps playing instead of silently skipping it.</li>
-      <li>Logs everything that happens to a Discord channel.</li>
-    </ul>
-    <div class="chips"><span class="chip">JavaScript</span><span class="chip">Node.js</span><span class="chip">discord-player</span>
-      <span class="chip">yt-dlp</span><span class="chip">FFmpeg</span></div>
-  </article>
-
-  <article class="proyecto">
-    <header><h3>CeratiBot</h3><span class="tipo"><span lang="es">Bot homenaje a Gustavo Cerati</span><span lang="en">Tribute bot to Gustavo Cerati</span></span></header>
-    <p lang="es">Trivia, discografía y un modo de charla con IA. Proyecto de fan: aclara que no es la persona real, no inventa
-       citas ni reproduce letras.</p>
-    <p lang="en">Trivia, discography and an AI chat mode. A fan project: it makes clear it is not the real person, and it
-       never makes up quotes or reproduces lyrics.</p>
-    <div class="chips"><span class="chip">Python</span><span class="chip">discord.py</span><span class="chip"><span lang="es">IA generativa</span><span lang="en">Generative AI</span></span></div>
-  </article>
-
-  <article class="proyecto">
-    <header><h3><span lang="es">Servidor propio</span><span lang="en">Own server</span></h3><span class="tipo"><span lang="es">Infraestructura</span><span lang="en">Infrastructure</span></span></header>
-    <p lang="es">Una máquina ARM en Oracle Cloud donde corren los bots y otros servicios, administrada con Docker Compose.</p>
-    <p lang="en">An ARM machine on Oracle Cloud that runs the bots and other services, managed with Docker Compose.</p>
-    <ul lang="es">
-      <li>Nube privada (Nextcloud) y servidor de Minecraft que se pausa solo cuando nadie juega.</li>
-      <li>Acceso privado con Tailscale; a internet solo queda abierto lo indispensable.</li>
-      <li>Respaldos semanales cifrados fuera del servidor y una prueba mensual de que se pueden restaurar.</li>
-    </ul>
-    <ul lang="en">
-      <li>Private cloud (Nextcloud) and a Minecraft server that pauses itself when nobody is playing.</li>
-      <li>Private access through Tailscale; only the essentials are open to the internet.</li>
-      <li>Weekly encrypted off-site backups and a monthly test that they can be restored.</li>
-    </ul>
-    <div class="chips"><span class="chip">Linux</span><span class="chip">Docker Compose</span><span class="chip">Oracle Cloud</span>
-      <span class="chip">Tailscale</span><span class="chip">Nextcloud</span></div>
-  </article>
-
-  <article class="proyecto">
-    <header><h3>prisma-estado</h3><span class="tipo"><span lang="es">Página de estado</span><span lang="en">Status page</span></span></header>
-    <p lang="es">Página pública que muestra si los bots están en línea. Vive fuera del servidor a propósito: si el servidor se
-       cae, la página lo sigue mostrando.</p>
-    <p lang="en">A public page that shows whether the bots are online. It lives outside the server on purpose: if the server
-       goes down, the page still shows it.</p>
-    <div class="chips"><span class="chip">HTML</span><span class="chip">GitHub Pages</span><span class="chip">GitHub Actions</span></div>
-    <div class="pie-proyecto">
-      <a class="vivo" href="https://hyperionsdx.github.io/prisma-estado/"><span lang="es">Ver página</span><span lang="en">View page</span></a>
-      <a href="https://github.com/HyperionSDX/prisma-estado"><span lang="es">Código</span><span lang="en">Code</span></a>
+  <!-- Herramientas -->
+  <section>
+    <div class="etiqueta revelar"><span lang="es">Herramientas</span><span lang="en">Toolkit</span></div>
+    <h2 class="seccion revelar"><span lang="es">Con qué trabajo</span><span lang="en">What I work with</span></h2>
+    <div class="herramientas">
+      <div class="vidrio vivo revelar"><h3><span lang="es">Lenguajes</span><span lang="en">Languages</span></h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">Node.js</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Bash</span></div></div>
+      <div class="vidrio vivo revelar"><h3><span lang="es">Infraestructura</span><span lang="en">Infrastructure</span></h3>
+        <div class="chips"><span class="chip">Linux</span><span class="chip">Docker</span><span class="chip">Oracle Cloud</span><span class="chip">Azure</span><span class="chip">Tailscale</span><span class="chip">Cloudflare</span></div></div>
+      <div class="vidrio vivo revelar"><h3><span lang="es">Automatización</span><span lang="en">Automation</span></h3>
+        <div class="chips"><span class="chip">GitHub Actions</span><span class="chip">GitHub Pages</span><span class="chip"><span lang="es">Pruebas</span><span lang="en">Testing</span></span><span class="chip">IA / AI</span></div></div>
     </div>
-  </article>
+  </section>
 
-  <footer><span lang="es">© 2026 Hyperion · Sitio sin rastreadores ni cookies</span><span lang="en">© 2026 Hyperion · No trackers or cookies</span></footer>
+  <!-- Contacto -->
+  <section id="contacto">
+    <div class="contacto vidrio revelar">
+      <div class="etiqueta" style="justify-content:center"><span lang="es">Contacto</span><span lang="en">Contact</span></div>
+      <h2 class="nacar"><span lang="es">Hablemos</span><span lang="en">Let's talk</span></h2>
+      <p lang="es">Para consultas sobre los proyectos o colaboraciones, la forma más rápida es por Discord.</p>
+      <p lang="en">For questions about the projects or collaborations, the fastest way is through Discord.</p>
+      <div class="acciones">
+        <span class="boton perla discord">Discord: d.jmnzz09</span>
+        <a class="boton" href="https://github.com/HyperionSDX">GitHub</a>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer><span lang="es">© 2026 Hyperion · Sitio sin rastreadores ni cookies</span><span lang="en">© 2026 Hyperion · No trackers or cookies</span></footer>
+
 <script>
+  // Idioma
   function poner(l) {
     document.documentElement.lang = l;
     document.documentElement.dataset.lang = l;
     document.querySelectorAll(".idiomas button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.l === l); });
     try { localStorage.setItem("idioma", l); } catch (e) {}
+    pintarSenal();
   }
   document.querySelectorAll(".idiomas button").forEach(function (b) {
     b.addEventListener("click", function () { poner(b.dataset.l); });
-  });
-  document.querySelectorAll(".idiomas button").forEach(function (b) {
     b.setAttribute("aria-pressed", b.dataset.l === document.documentElement.dataset.lang);
   });
+
+  // Aparecer al bajar
+  var obs = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visto"); obs.unobserve(e.target); } });
+  }, { threshold: .12 }) : null;
+  document.querySelectorAll(".revelar").forEach(function (el) { obs ? obs.observe(el) : el.classList.add("visto"); });
+
+  // Señal en vivo: se le pregunta directo a Prisma (Oracle o Azure, gana el primero que responde)
+  var FUENTES = [["Oracle", "https://prisma.tail53ad1c.ts.net/estado.json"], ["Azure", "https://prisma-azure.tail87f042.ts.net/estado.json"]];
+  var datos = null;
+  function pedir(url) {
+    return fetch(url, { cache: "no-store", signal: AbortSignal.timeout(8000) }).then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
+  }
+  function pintarSenal() {
+    var en = document.documentElement.dataset.lang === "en";
+    var caja = document.getElementById("senal"), txt = document.getElementById("senal-texto"), info = document.getElementById("senal-datos");
+    var ins = document.getElementById("insignia-prisma");
+    if (!datos) return;
+    if (datos.error) {
+      caja.className = "senal vidrio mal"; ins.className = "insignia mal";
+      txt.textContent = en ? "not responding right now" : "no responde en este momento"; info.textContent = "";
+      return;
+    }
+    var s = datos.servicios || [], enLinea = s.filter(function (x) { return x.estado === "operativo" || x.estado === "pausado"; }).length;
+    var prisma = s.filter(function (x) { return x.nombre === "Prisma"; })[0];
+    var ok = prisma && prisma.estado === "operativo";
+    caja.className = "senal vidrio " + (ok ? "ok" : "mal"); ins.className = "insignia " + (ok ? "ok" : "mal");
+    txt.textContent = ok ? (en ? "online now" : "en línea ahora") : (en ? "having trouble" : "con problemas");
+    info.innerHTML = "";
+    var a = document.createElement("span"); a.innerHTML = (en ? "Server " : "Servidor ") + "<strong></strong>"; a.lastChild.textContent = datos.servidor;
+    var b = document.createElement("span"); b.innerHTML = " · <strong></strong> " + (en ? "services online" : "servicios en línea"); b.childNodes[1].textContent = enLinea + "/" + s.length;
+    info.append(a, b);
+  }
+  function actualizar() {
+    Promise.any(FUENTES.map(function (f) { return pedir(f[1]).then(function (x) { if (!x.servicios) throw 0; x.servidor = f[0]; return x; }); }))
+      .then(function (x) { datos = x; }).catch(function () { datos = { error: true }; }).finally(pintarSenal);
+  }
+  actualizar(); setInterval(actualizar, 60000);
 </script>
 </body>
 </html>
