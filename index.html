@@ -37,6 +37,7 @@
   .idiomas button[aria-pressed="true"] { background: var(--acento); color: #fff; }
   a { color: var(--acento); }
   .hero h1 { font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
+  .hero .rol { color: var(--acento); font-weight: 600; font-size: 1rem; margin: -4px 0 14px; letter-spacing: .02em; }
   .hero p { color: var(--suave); font-size: 1.08rem; margin: 0 0 20px; max-width: 58ch; }
   .enlaces { display: flex; flex-wrap: wrap; gap: 10px; }
   .boton { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px;
@@ -72,11 +73,12 @@
   </div>
 
   <section class="hero">
-    <h1><span lang="es">Hola, soy Hyperion.</span><span lang="en">Hi, I'm Hyperion.</span></h1>
-    <p lang="es">Desarrollador autodidacta en Chile. Construyo bots de Discord, paneles web y la infraestructura donde corren:
-       servidores con Docker, despliegue automático, pruebas y un sistema que se vigila y se repara solo.</p>
-    <p lang="en">Self-taught developer from Chile. I build Discord bots, web dashboards and the infrastructure they run on:
-       Docker servers, automatic deployment, tests and a system that monitors and repairs itself.</p>
+    <h1>Hyperion</h1>
+    <p class="rol"><span lang="es">Desarrollo de software · Chile</span><span lang="en">Software development · Chile</span></p>
+    <p lang="es">Desarrollo de bots para Discord, paneles web e infraestructura autogestionada: servidores con Docker,
+       despliegue continuo, pruebas automatizadas y monitoreo con recuperación automática.</p>
+    <p lang="en">Development of Discord bots, web dashboards and self-managed infrastructure: Docker servers,
+       continuous deployment, automated testing and monitoring with automatic recovery.</p>
     <div class="enlaces">
       <a class="boton" href="https://github.com/HyperionSDX">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.540 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.130-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.420-3.58-8-8-8z"/></svg>
@@ -126,12 +128,12 @@
     <p lang="en">Plays from YouTube, Spotify, SoundCloud and Apple Music, with controls, a web dashboard and five languages
        that are remembered across restarts.</p>
     <ul lang="es">
-      <li>Diagnostiqué y corregí un corte de audio a los 120 ms (PCM sin cabeceras pasando por un segundo FFmpeg).</li>
+      <li>Diagnóstico y corrección de un corte de audio a los 120 ms (PCM sin cabeceras pasando por un segundo FFmpeg).</li>
       <li>Si una pista falla, la busca en otra fuente y sigue sonando en vez de saltarla en silencio.</li>
       <li>Registro de todo lo que pasa en un canal de Discord.</li>
     </ul>
     <ul lang="en">
-      <li>Diagnosed and fixed audio cutting out after 120 ms (headerless PCM going through a second FFmpeg).</li>
+      <li>Diagnosis and fix of audio cutting out after 120 ms (headerless PCM going through a second FFmpeg).</li>
       <li>If a track fails, it looks for it on another source and keeps playing instead of silently skipping it.</li>
       <li>Logs everything that happens to a Discord channel.</li>
     </ul>
@@ -179,7 +181,7 @@
     </div>
   </article>
 
-  <footer><span lang="es">Hecho a mano por Hyperion · sin rastreadores ni cookies</span><span lang="en">Handmade by Hyperion · no trackers, no cookies</span></footer>
+  <footer><span lang="es">© 2026 Hyperion · Sitio sin rastreadores ni cookies</span><span lang="en">© 2026 Hyperion · No trackers or cookies</span></footer>
 </main>
 <script>
   function poner(l) {
