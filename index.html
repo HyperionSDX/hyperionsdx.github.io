@@ -1,11 +1,21 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hyperion · Proyectos</title>
-<meta name="description" content="Bots de Discord, paneles web e infraestructura propia hechos por Hyperion.">
+<title>Hyperion · Proyectos / Projects</title>
+<meta name="description" content="Bots de Discord, paneles web e infraestructura propia hechos por Hyperion. Discord bots, web dashboards and self-hosted infrastructure by Hyperion.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 29 27H3z' fill='%237c6cf2'/%3E%3C/svg%3E">
+<script>
+  // Elige idioma: el guardado, o el del navegador (español si empieza con "es", si no inglés).
+  (function () {
+    var l;
+    try { l = localStorage.getItem("idioma"); } catch (e) {}
+    if (l !== "es" && l !== "en") l = (navigator.language || "es").toLowerCase().indexOf("es") === 0 ? "es" : "en";
+    document.documentElement.lang = l;
+    document.documentElement.dataset.lang = l;
+  })();
+</script>
 <style>
   :root {
     --fondo: #f6f5fb; --tarjeta: #ffffff; --texto: #1d1b2c; --suave: #615e76; --borde: #e4e1f0;
@@ -15,10 +25,16 @@
     :root { --fondo: #12111a; --tarjeta: #1c1a27; --texto: #ecebf5; --suave: #a29fb6; --borde: #2c2a3b;
             --acento: #9d90ff; --chip: #262337; --ok: #3cc47c; }
   }
+  html[data-lang="es"] [lang="en"]:not(html), html[data-lang="en"] [lang="es"]:not(html) { display: none !important; }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--fondo); color: var(--texto);
          font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 56px 16px 64px; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  .barra { display: flex; justify-content: flex-end; margin-bottom: 28px; }
+  .idiomas { display: inline-flex; border: 1px solid var(--borde); border-radius: 999px; background: var(--tarjeta); padding: 3px; }
+  .idiomas button { border: 0; background: none; color: var(--suave); font: 600 .85rem/1 inherit; font-family: inherit;
+                    padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+  .idiomas button[aria-pressed="true"] { background: var(--acento); color: #fff; }
   a { color: var(--acento); }
   .hero h1 { font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
   .hero p { color: var(--suave); font-size: 1.08rem; margin: 0 0 20px; max-width: 58ch; }
@@ -48,87 +64,136 @@
 </head>
 <body>
 <main>
+  <div class="barra">
+    <div class="idiomas" role="group" aria-label="Idioma / Language">
+      <button type="button" data-l="es">Español</button>
+      <button type="button" data-l="en">English</button>
+    </div>
+  </div>
+
   <section class="hero">
-    <h1>Hola, soy Hyperion.</h1>
-    <p>Desarrollador autodidacta en Chile. Construyo bots de Discord, paneles web y la infraestructura donde corren:
+    <h1><span lang="es">Hola, soy Hyperion.</span><span lang="en">Hi, I'm Hyperion.</span></h1>
+    <p lang="es">Desarrollador autodidacta en Chile. Construyo bots de Discord, paneles web y la infraestructura donde corren:
        servidores con Docker, despliegue automático, pruebas y un sistema que se vigila y se repara solo.</p>
+    <p lang="en">Self-taught developer from Chile. I build Discord bots, web dashboards and the infrastructure they run on:
+       Docker servers, automatic deployment, tests and a system that monitors and repairs itself.</p>
     <div class="enlaces">
       <a class="boton" href="https://github.com/HyperionSDX">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.540 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.130-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.420-3.58-8-8-8z"/></svg>
         GitHub
       </a>
-      <span class="boton" title="Usuario de Discord">
+      <span class="boton">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0015.4 3l-.6 1.3a18.4 18.4 0 00-5.6 0L8.6 3a19.7 19.7 0 00-4.9 1.5C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 006 3l1.3-2.1a12.9 12.9 0 01-2-1l.5-.4a14.2 14.2 0 0012.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 006-3c.5-5.2-.9-9.7-3.6-13.8zM8 15.4c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.6 8 10.6s2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg>
-        Discord: <span id="discord">d.jmnzz09</span>
+        Discord: d.jmnzz09
       </span>
     </div>
   </section>
 
-  <h2>Proyectos</h2>
+  <h2><span lang="es">Proyectos</span><span lang="en">Projects</span></h2>
 
   <article class="proyecto">
-    <header><h3>Prisma</h3><span class="tipo">Asistente personal para Discord</span></header>
-    <p>Un bot que ordena el día: resumen de la mañana con clima, agenda y noticias explicadas por IA, recordatorios,
+    <header><h3>Prisma</h3><span class="tipo"><span lang="es">Asistente personal para Discord</span><span lang="en">Personal assistant for Discord</span></span></header>
+    <p lang="es">Un bot que ordena el día: resumen de la mañana con clima, agenda y noticias explicadas por IA, recordatorios,
        conversación con fotos y documentos, y avisos cuando algo cambia en una página o un precio.</p>
-    <ul>
+    <p lang="en">A bot that organizes the day: a morning briefing with weather, schedule and AI-explained news, reminders,
+       conversations with photos and documents, and alerts when a web page or a price changes.</p>
+    <ul lang="es">
       <li>Panel web instalable en el celular, con inicio de sesión de dos pasos y niveles de acceso.</li>
       <li><strong>Prisma Security</strong>: un guardián en GitHub Actions que revisa todo cada hora, intenta repararlo
           solo y explica en palabras simples lo que pasó.</li>
       <li>Pruebas automáticas antes de cada despliegue; si fallan, sigue corriendo la versión anterior.</li>
       <li>IA con respaldo en cadena (Gemini, Groq y un modelo propio) para no quedarse sin respuesta.</li>
     </ul>
+    <ul lang="en">
+      <li>Web dashboard installable on a phone, with two-step sign-in and access levels.</li>
+      <li><strong>Prisma Security</strong>: a GitHub Actions watchdog that checks everything every hour, tries to fix
+          problems on its own and explains in plain words what happened.</li>
+      <li>Automatic tests before every deployment; if they fail, the previous version keeps running.</li>
+      <li>AI with a fallback chain (Gemini, Groq and a self-hosted model) so it always has an answer.</li>
+    </ul>
     <div class="chips"><span class="chip">Python</span><span class="chip">discord.py</span><span class="chip">aiohttp</span>
       <span class="chip">Docker</span><span class="chip">GitHub Actions</span><span class="chip">Gemini</span></div>
     <div class="pie-proyecto">
-      <a class="vivo" href="https://hyperionsdx.github.io/prisma-estado/">Estado en vivo</a>
-      <span class="privado">Código privado (datos personales)</span>
+      <a class="vivo" href="https://hyperionsdx.github.io/prisma-estado/"><span lang="es">Estado en vivo</span><span lang="en">Live status</span></a>
+      <span class="privado"><span lang="es">Código privado (datos personales)</span><span lang="en">Private code (personal data)</span></span>
     </div>
   </article>
 
   <article class="proyecto">
-    <header><h3>Botzy</h3><span class="tipo">Bot de música para Discord</span></header>
-    <p>Reproduce desde YouTube, Spotify, SoundCloud y Apple Music, con controles, panel web y cinco idiomas que se
+    <header><h3>Botzy</h3><span class="tipo"><span lang="es">Bot de música para Discord</span><span lang="en">Music bot for Discord</span></span></header>
+    <p lang="es">Reproduce desde YouTube, Spotify, SoundCloud y Apple Music, con controles, panel web y cinco idiomas que se
        recuerdan entre reinicios.</p>
-    <ul>
+    <p lang="en">Plays from YouTube, Spotify, SoundCloud and Apple Music, with controls, a web dashboard and five languages
+       that are remembered across restarts.</p>
+    <ul lang="es">
       <li>Diagnostiqué y corregí un corte de audio a los 120 ms (PCM sin cabeceras pasando por un segundo FFmpeg).</li>
       <li>Si una pista falla, la busca en otra fuente y sigue sonando en vez de saltarla en silencio.</li>
       <li>Registro de todo lo que pasa en un canal de Discord.</li>
+    </ul>
+    <ul lang="en">
+      <li>Diagnosed and fixed audio cutting out after 120 ms (headerless PCM going through a second FFmpeg).</li>
+      <li>If a track fails, it looks for it on another source and keeps playing instead of silently skipping it.</li>
+      <li>Logs everything that happens to a Discord channel.</li>
     </ul>
     <div class="chips"><span class="chip">JavaScript</span><span class="chip">Node.js</span><span class="chip">discord-player</span>
       <span class="chip">yt-dlp</span><span class="chip">FFmpeg</span></div>
   </article>
 
   <article class="proyecto">
-    <header><h3>CeratiBot</h3><span class="tipo">Bot homenaje a Gustavo Cerati</span></header>
-    <p>Trivia, discografía y un modo de charla con IA. Proyecto de fan: aclara que no es la persona real, no inventa
+    <header><h3>CeratiBot</h3><span class="tipo"><span lang="es">Bot homenaje a Gustavo Cerati</span><span lang="en">Tribute bot to Gustavo Cerati</span></span></header>
+    <p lang="es">Trivia, discografía y un modo de charla con IA. Proyecto de fan: aclara que no es la persona real, no inventa
        citas ni reproduce letras.</p>
-    <div class="chips"><span class="chip">Python</span><span class="chip">discord.py</span><span class="chip">IA generativa</span></div>
+    <p lang="en">Trivia, discography and an AI chat mode. A fan project: it makes clear it is not the real person, and it
+       never makes up quotes or reproduces lyrics.</p>
+    <div class="chips"><span class="chip">Python</span><span class="chip">discord.py</span><span class="chip"><span lang="es">IA generativa</span><span lang="en">Generative AI</span></span></div>
   </article>
 
   <article class="proyecto">
-    <header><h3>Servidor propio</h3><span class="tipo">Infraestructura</span></header>
-    <p>Una máquina ARM en Oracle Cloud donde corren los bots y otros servicios, administrada con Docker Compose.</p>
-    <ul>
+    <header><h3><span lang="es">Servidor propio</span><span lang="en">Own server</span></h3><span class="tipo"><span lang="es">Infraestructura</span><span lang="en">Infrastructure</span></span></header>
+    <p lang="es">Una máquina ARM en Oracle Cloud donde corren los bots y otros servicios, administrada con Docker Compose.</p>
+    <p lang="en">An ARM machine on Oracle Cloud that runs the bots and other services, managed with Docker Compose.</p>
+    <ul lang="es">
       <li>Nube privada (Nextcloud) y servidor de Minecraft que se pausa solo cuando nadie juega.</li>
       <li>Acceso privado con Tailscale; a internet solo queda abierto lo indispensable.</li>
       <li>Respaldos semanales cifrados fuera del servidor y una prueba mensual de que se pueden restaurar.</li>
+    </ul>
+    <ul lang="en">
+      <li>Private cloud (Nextcloud) and a Minecraft server that pauses itself when nobody is playing.</li>
+      <li>Private access through Tailscale; only the essentials are open to the internet.</li>
+      <li>Weekly encrypted off-site backups and a monthly test that they can be restored.</li>
     </ul>
     <div class="chips"><span class="chip">Linux</span><span class="chip">Docker Compose</span><span class="chip">Oracle Cloud</span>
       <span class="chip">Tailscale</span><span class="chip">Nextcloud</span></div>
   </article>
 
   <article class="proyecto">
-    <header><h3>prisma-estado</h3><span class="tipo">Página de estado</span></header>
-    <p>Página pública que muestra si los bots están en línea. Vive fuera del servidor a propósito: si el servidor se
+    <header><h3>prisma-estado</h3><span class="tipo"><span lang="es">Página de estado</span><span lang="en">Status page</span></span></header>
+    <p lang="es">Página pública que muestra si los bots están en línea. Vive fuera del servidor a propósito: si el servidor se
        cae, la página lo sigue mostrando.</p>
+    <p lang="en">A public page that shows whether the bots are online. It lives outside the server on purpose: if the server
+       goes down, the page still shows it.</p>
     <div class="chips"><span class="chip">HTML</span><span class="chip">GitHub Pages</span><span class="chip">GitHub Actions</span></div>
     <div class="pie-proyecto">
-      <a class="vivo" href="https://hyperionsdx.github.io/prisma-estado/">Ver página</a>
-      <a href="https://github.com/HyperionSDX/prisma-estado">Código</a>
+      <a class="vivo" href="https://hyperionsdx.github.io/prisma-estado/"><span lang="es">Ver página</span><span lang="en">View page</span></a>
+      <a href="https://github.com/HyperionSDX/prisma-estado"><span lang="es">Código</span><span lang="en">Code</span></a>
     </div>
   </article>
 
-  <footer>Hecho a mano por Hyperion · sin rastreadores ni cookies</footer>
+  <footer><span lang="es">Hecho a mano por Hyperion · sin rastreadores ni cookies</span><span lang="en">Handmade by Hyperion · no trackers, no cookies</span></footer>
 </main>
+<script>
+  function poner(l) {
+    document.documentElement.lang = l;
+    document.documentElement.dataset.lang = l;
+    document.querySelectorAll(".idiomas button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.l === l); });
+    try { localStorage.setItem("idioma", l); } catch (e) {}
+  }
+  document.querySelectorAll(".idiomas button").forEach(function (b) {
+    b.addEventListener("click", function () { poner(b.dataset.l); });
+  });
+  document.querySelectorAll(".idiomas button").forEach(function (b) {
+    b.setAttribute("aria-pressed", b.dataset.l === document.documentElement.dataset.lang);
+  });
+</script>
 </body>
 </html>
